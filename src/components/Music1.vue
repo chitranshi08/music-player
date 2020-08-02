@@ -30,7 +30,7 @@
 	export default{
 		name:"Music1",
 		data:()=>({
-			Songlist:["Kalimba.MP3","Maid with the Flaxen Hair.mP3","Sleep Away.MP3",],
+			Songlist:["Kalimba.mp3","Maid with the Flaxen Hair.mp3","Sleep Away.mp3",],
 			currentSong:"",
 			songIndex:0,
 			isPlaying:false,
@@ -42,16 +42,19 @@
 		}),
 		created(){
 			this.song = false
-			this.currentSong = this.Songlist[this.songIndex]
+			this.setCurrentSong()
 		},
 		methods:{
+			setCurrentSong(){
+			this.currentSong = this.Songlist[this.songIndex]
+		},
 			prev(){
 				if(this.songIndex == 0){
 					return;
 				}
 
 				this.songIndex = this.songIndex - 1
-				this.currentSong = this.Songlist[this.songIndex]
+				this.setCurrentSong()
 				this.$refs.audio.load()
 				
 
@@ -64,7 +67,7 @@
 					this.isPlaying = false
 					return;
 				}
-				this.currentSong = this.Songlist[this.songIndex]
+				this.setCurrentSong()
 				this.$refs.audio.play()
 				this.song =true
 					this.nosong = false
@@ -79,8 +82,7 @@
 				this.songIndex = this.songIndex + 1
 
 		
-
-				this.currentSong = this.Songlist[this.songIndex]
+				this.setCurrentSong()
 				this.$refs.audio.load()
 				
 
@@ -109,7 +111,7 @@
 		font-weight:bold;
 	}
 	.playlist{
-		height:70px;
+		padding:5px;
 		width:300px;
 		background:#f0a6ca;
 		margin:auto;
